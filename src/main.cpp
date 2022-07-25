@@ -9,7 +9,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pCmdLine, 
 {
     MainWindow mainWin;
 
-    if (!mainWin.create(L"Learn to Program Windows", WS_OVERLAPPEDWINDOW))
+    if (!mainWin.create(L"My Window", WS_OVERLAPPEDWINDOW))
     {
         return 0;
     }
