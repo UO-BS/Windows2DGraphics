@@ -2,9 +2,12 @@
 #define MAIN_WINDOW_H
 
 #include "BaseWindow.h"
+#include "CircleButton.h"
 
 class MainWindow : public BaseWindow<MainWindow>
 {
+private:
+    CircleButton myCircleButton;
 public:
     PCWSTR  className() const;
     LRESULT handleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam);

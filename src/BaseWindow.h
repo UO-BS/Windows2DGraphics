@@ -14,7 +14,7 @@ protected:
     virtual LRESULT handleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam) =0;
 
 public:
-
+    
     BaseWindow(): m_hwnd{NULL} {}
     HWND getHandle() const {return m_hwnd;}
 
