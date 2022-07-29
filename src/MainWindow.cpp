@@ -13,13 +13,23 @@ LRESULT MainWindow::handleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
     case WM_CREATE:
         {
         LRESULT lRes = DefWindowProc(m_hwnd, uMsg, wParam, lParam);
+        
         CreateWindowEx(0, L"BUTTON", L"MyBtn", WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON, 0,0,100,100,m_hwnd,(HMENU)1,GetModuleHandle(NULL),NULL);
         CreateWindowEx(0, L"BUTTON", L"MyBtn2", WS_CHILD | WS_VISIBLE, 100,100,100,100,m_hwnd,(HMENU)2,GetModuleHandle(NULL),NULL);
         CreateWindowEx(0, L"STATIC", L"MyLabel", WS_CHILD | WS_VISIBLE, 200,200,100,100,m_hwnd,(HMENU)3,GetModuleHandle(NULL),NULL);
+        //Having different dimensions than the myCircleButton object will crop it
         myCircleButton.create(L"MyCircleButton",WS_CHILD | WS_VISIBLE,0,300,300,100,100,m_hwnd,(HMENU)4);
 
         return lRes;
         }
+
+    case WM_GETMINMAXINFO:
+        {
+            LPMINMAXINFO minMaxInfo = (LPMINMAXINFO)lParam;
+            minMaxInfo->ptMinTrackSize.x = 500;
+            minMaxInfo->ptMinTrackSize.y = 500;
+        }
+        return 0;
 
     case WM_COMMAND:
         switch(LOWORD(wParam)){

@@ -7,7 +7,7 @@
 class MainWindow : public BaseWindow<MainWindow>
 {
 private:
-    CircleButton myCircleButton;
+    CircleButton myCircleButton{0,0,100,100};
 public:
     PCWSTR  className() const;
     LRESULT handleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam);
