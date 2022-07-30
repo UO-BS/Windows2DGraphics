@@ -19,6 +19,8 @@ LRESULT MainWindow::handleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
         CreateWindowEx(0, L"STATIC", L"MyLabel", WS_CHILD | WS_VISIBLE, 200,200,100,100,m_hwnd,(HMENU)3,GetModuleHandle(NULL),NULL);
         //Having different dimensions than the myCircleButton object will crop it
         myCircleButton.create(L"MyCircleButton",WS_CHILD | WS_VISIBLE,0,300,300,100,100,m_hwnd,(HMENU)4);
+        
+        
 
         return lRes;
         }

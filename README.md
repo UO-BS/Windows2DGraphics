@@ -1,7 +1,8 @@
 # Windows2DGraphics
-These files include my own implementation of graphics for Windows systems to be used in my other projects.
+These files include my testing of 2D graphics for Windows systems which will eventually be used in my other C++ projects.
 
-Currently in development. I am still learning the Win32 API.
+BaseWindow.h and main.cpp can/will be used in other programs. 
+The other classes were only added to test some of the Win32 API features.
 
-Any suggestions or tips are welcome.
+Running main.exe will open a parent window with some basic control windows that I was testing.
 =======
