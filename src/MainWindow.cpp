@@ -19,8 +19,6 @@ LRESULT MainWindow::handleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
         CreateWindowEx(0, L"STATIC", L"MyLabel", WS_CHILD | WS_VISIBLE, 200,200,100,100,m_hwnd,(HMENU)3,GetModuleHandle(NULL),NULL);
         //Having different dimensions than the myCircleButton object will crop it
         myCircleButton.create(L"MyCircleButton",WS_CHILD | WS_VISIBLE,0,300,300,100,100,m_hwnd,(HMENU)4);
-        
-        
 
         return lRes;
         }
@@ -58,8 +56,19 @@ LRESULT MainWindow::handleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
             
             HBRUSH brush = CreateSolidBrush(0x000000FF);
             FillRect(hdc, &ps.rcPaint, brush);
-
             DeleteObject(brush);
+
+            HBITMAP bmp = (HBITMAP) LoadImage(NULL,m_imagePath,IMAGE_BITMAP,1000,750,LR_LOADFROMFILE);
+            if (!bmp) {
+                std::cout << "Error Loading .bmp file: " << GetLastError() << "\n";
+                std::cout << "Image path: " << m_imagePath << "\n";
+            }
+            HDC tempDC = CreateCompatibleDC(hdc);
+            HGDIOBJ replacedOBJ = SelectObject(tempDC, bmp);
+            BitBlt(hdc,400,400,1000,750,tempDC,0,0,SRCCOPY);
+            SelectObject(tempDC, replacedOBJ);
+            DeleteObject(bmp);
+            DeleteDC(tempDC);
             
             EndPaint(m_hwnd, &ps);
         }
