@@ -10,16 +10,16 @@ public:
     LRESULT handleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam);
 
     ClickableImageWindow()=delete;
-    ClickableImageWindow(HBITMAP imageColor, HBITMAP imageMask);
+    ClickableImageWindow(LPCWSTR imageColor, LPCWSTR imageMask);
 private:
 
-    HBITMAP m_imageColor;
-    HBITMAP m_imageMask;
-    int m_imageHeight;
-    int m_imageWidth;
+    LPCWSTR m_imageColor;
+    LPCWSTR m_imageMask;
+    int m_imageHeight{750}; 
+    int m_imageWidth{1000}; 
 
     //Helper function for region creation
-    HRGN getRgnFromBitMask();
+    void setRgnFromBitMask();
 };
 
 #endif
