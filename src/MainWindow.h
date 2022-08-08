@@ -9,7 +9,7 @@ class MainWindow : public BaseWindow<MainWindow>
 {
 private:
     CircleButton myCircleButton{0,0,100,100};
-    ClickableImageWindow myClickImage{L"../resources/temp.bmp",L"../resources/tempMask.bmp"};
+    ClickableImageWindow myClickImage{L"../resources/temp.bmp",L"../resources/tempMask.bmp",750,1000};
     LPCWSTR m_imagePath{L"../resources/temp.bmp"};
 public:
     PCWSTR  className() const;

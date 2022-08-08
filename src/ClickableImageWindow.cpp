@@ -5,7 +5,8 @@
 #include "ClickableImageWindow.h"
 #include <iostream>
 
-ClickableImageWindow::ClickableImageWindow(LPCWSTR imageColor, LPCWSTR imageMask) : BaseWindow(), m_imageColor{imageColor}, m_imageMask{imageMask} {}
+ClickableImageWindow::ClickableImageWindow(LPCWSTR imageColor, LPCWSTR imageMask, int imageHeight, int imageWidth) : 
+            BaseWindow(), m_imageColor{imageColor}, m_imageMask{imageMask},m_imageHeight{imageHeight},m_imageWidth{imageWidth} {}
 
 PCWSTR ClickableImageWindow::className() const{return L"CircleButton";}
 
@@ -16,7 +17,7 @@ LRESULT ClickableImageWindow::handleMessage(UINT uMsg, WPARAM wParam, LPARAM lPa
     case WM_CREATE:
         {
         LRESULT lRes = DefWindowProc(m_hwnd, uMsg, wParam, lParam);
-        setRgnFromBitMask();
+        setIrregularRgn();
         return lRes;
         }
 
@@ -57,9 +58,9 @@ LRESULT ClickableImageWindow::handleMessage(UINT uMsg, WPARAM wParam, LPARAM lPa
 }
 
 
-void ClickableImageWindow::setRgnFromBitMask()
+void ClickableImageWindow::setIrregularRgn()
 {
-    HRGN hRgn = CreateRectRgn(0,0,0,0); //CHANGE 10s TO 0, THIS WAS FOR TESTING
+    HRGN hRgn = CreateRectRgn(0,0,0,0); 
 
     //Load mask and DCs
     HDC clientDC = GetDC(m_hwnd);
