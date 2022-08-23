@@ -15,7 +15,7 @@ public:
     FadingTextWindow(int rows, bool fadeDownwards = true,COLORREF textColor = 0x00000000 ,COLORREF backgroundColor = 0x00FFFFFF);
     FadingTextWindow()=delete;
 
-    void addText(LPCWSTR newText);
+    void addText(const std::string& newText);
     
 private:
     int m_rows; //Use vector size instead?
@@ -24,7 +24,7 @@ private:
 
     bool m_fadeDownwards;
 
-    std::vector<std::pair<HWND,LPCWSTR>> m_staticControls;
+    std::vector<std::pair<HWND,std::string>> m_staticControls;
 
     HBRUSH m_tempBrush;
 };

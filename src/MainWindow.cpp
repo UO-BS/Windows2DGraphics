@@ -22,7 +22,7 @@ LRESULT MainWindow::handleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
         myClickImage.create(L"MyClickImage", WS_CHILD | WS_VISIBLE,0,500,0,1000,1000,m_hwnd,(HMENU)5);
         myFadingText.create(L"MyFadingText", WS_CHILD | WS_VISIBLE,0,600,0,200,200,m_hwnd,(HMENU)6);
         for (int i=0;i<5;i++) {
-            myFadingText.addText(L"test");
+            myFadingText.addText("test");
         }
 
         return lRes;

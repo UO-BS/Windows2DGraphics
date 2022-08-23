@@ -5,6 +5,12 @@
 #include "FadingTextWindow.h"
 #include <iostream>
 
+//Creating a way to convert std::strings to std::wstrings
+#include <locale>
+#include <codecvt>
+#include <string>
+std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+
 FadingTextWindow::FadingTextWindow(int rows,bool fadeDownwards, COLORREF textColor, COLORREF backgroundColor) : m_rows{rows}, m_backgroundColor{backgroundColor}, m_textColor{textColor}, m_fadeDownwards{fadeDownwards}
 {
     m_staticControls.resize(m_rows);
@@ -20,7 +26,7 @@ LRESULT FadingTextWindow::handleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
         LRESULT lRes = DefWindowProc(m_hwnd, uMsg, wParam, lParam);
 
         for (int i=0;i<m_rows;i++) {
-            m_staticControls[i] = std::pair{CreateWindowEx(0, L"STATIC", L"", WS_CHILD | WS_VISIBLE | SS_CENTER, 0,0,0,0,m_hwnd,(HMENU)(INT_PTR)i,GetModuleHandle(NULL),NULL),L""};
+            m_staticControls[i] = std::pair{CreateWindowEx(0, L"STATIC", L"", WS_CHILD | WS_VISIBLE | SS_CENTER, 0,0,0,0,m_hwnd,(HMENU)(INT_PTR)i,GetModuleHandle(NULL),NULL),""};
         }
 
         return lRes;
@@ -79,13 +85,12 @@ LRESULT FadingTextWindow::handleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
     return TRUE;
 }
 
-void FadingTextWindow::addText(LPCWSTR newText)
+void FadingTextWindow::addText(const std::string& newText)
 {
     for (int i=m_staticControls.size()-1;i>0;i--) {
-        SetWindowText(m_staticControls[i].first,m_staticControls[i-1].second);
+        SetWindowText(m_staticControls[i].first,converter.from_bytes(m_staticControls[i-1].second).c_str());
         m_staticControls[i].second = m_staticControls[i-1].second;
     }
-    SetWindowText(m_staticControls[0].first,newText);
     m_staticControls[0].second = newText;
-
+    SetWindowText(m_staticControls[0].first,converter.from_bytes(m_staticControls[0].second).c_str());
 }
